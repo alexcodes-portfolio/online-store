@@ -1,0 +1,92 @@
+[
+    {
+        "id": 0,
+        "name": "Snowscape 7",
+        "description": "Maneuverable and ultra stable on or off track, Snowscape 7 uses 3D construction for consistent behavior. It's ideal for sport & recreational skiers.",
+        "category": "classic",
+        "price": 199.90,
+        "sizes": ["L", "M", "XL", "XXL"],
+        "quantity": [1, 2, 3, 4, 5],
+        "imgUrl": "L39175000.jpg"
+    },
+    {
+        "id": 1,
+        "name": "Equipe 8 Skate",
+        "description": "Equipe 8 Skate is fast and light for great speed and nimble agility, but builds confidence with extra stability.",
+        "category": "skating",
+        "price": 199.90,
+        "sizes": ["174", "179", "186", "191"],
+        "quantity": [1, 2, 3, 4, 5],
+        "imgUrl": "L39158700.jpg"
+    },
+    {
+        "id": 2,
+        "name": "S/Lab Carbon Skate Yellow",
+        "description": "For athletes who push skate-skiing to the highest level of performance. S/Lab Carbon Skate Yellow combines pure power with exceptional lightweight. Optimized for universal/compact snow conditions",
+        "category": "skating",
+        "price": 599.90,
+        "sizes": ["177", "182", "187", "192"],
+        "quantity": [1, 2, 3, 4, 5],
+        "imgUrl": "L39939900.jpg"
+    },
+    {
+        "id": 3,
+        "name": "S-Lab Classic Blue Med",
+        "description": "For athletes who push classic skiing to the highest level of performance. S-Lab Classic Blue combines pure precision with exceptionally light weight. Optimum for hard wax snow conditions.",
+        "category": "classic",
+        "price": 499.90,
+        "sizes": ["201", "206"],
+        "quantity": [1, 2, 3, 4, 5],
+        "imgUrl": "L39940900.jpg"
+    },
+    {
+        "id": 4,
+        "name": "RS Skate",
+        "description": "The RS Skate combines the key benefits of each S-LAB Skate models but uses a forgiving and lightweight D-Carbon core for improved ease of use and stability. With its versatile camber, G5 World Cup base and structure, the RS ensures a fast glide in all conditions.",
+        "category": "skating",
+        "price": 299.90,
+        "sizes": ["170", "177", "182", "186", "187", "192"],
+        "quantity": [1, 2, 3, 4, 5],
+        "imgUrl": "L39941200.jpg"
+    },
+    {
+        "id": 5,
+        "name": "S/Race Skin Soft",
+        "description": "Racing performance from 7 am to 7 pm. In longer races and all day events, conditions change. S/Race Skin incroporates Formula Pomoca Skin for true race speed and confidence in all snow conditions. Win without kick wax.",
+        "category": "classic",
+        "price": 499.90,
+        "sizes": ["188", "196", "201", "206"],
+        "quantity": [1, 2, 3, 4, 5],
+        "imgUrl": "L39917100.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Equipe 6 Skate",
+        "description": "For an easy combination of performance, stability and predictability, this gliding ski delivers stability and ease with great performance.",
+        "category": "skating", 
+        "price": 129.90,
+        "sizes": ["161", "171", "181", "186", "191"],
+        "quantity": [1, 2, 3, 4, 5],
+        "imgUrl": "L39160300.jpg"
+    },
+    {
+        "id": 7,
+        "name": "RC Classic Hard",
+        "description": "The RC Classic combines the key benefits of the top performance S-LAB Classic models, but uses a forgiving and lightweight D-Carbon Core to provide a smoother kick. With its versatile camber, G5 World Cup base and structure, the RC ensures fast glide in all conditions.",
+        "category": "classic",  
+        "price": 299.90,
+        "sizes": ["201", "206"],
+        "quantity": [1, 2, 3, 4, 5],
+        "imgUrl": "L39917700.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Equipe 8 Skin X-Stiff",
+        "description": "Experience classic performance without the challenge of daily waxing. Equipe 8 Skin's SKINGRIP inserts deliver precise, secure grip and silent, fast gliding for skiers who demand performance in various snow conditions.",
+        "category": "classic",
+        "price": 229.90,
+        "sizes": ["206"],
+        "quantity": [1, 2, 3, 4, 5],
+        "imgUrl": "L39918100.jpg"
+    }
+]

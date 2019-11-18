@@ -1,0 +1,9 @@
+
+AuthType Basic
+AuthName "Password Protection"
+AuthUserFile /www/htdocs/w0141809/react-app.eu/.htpasswd
+Require valid-user
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]
