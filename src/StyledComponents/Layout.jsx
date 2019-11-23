@@ -8,7 +8,7 @@ export const MainContainer = styled(Container)`
     margin-top: 1.5em;
 
     @media ${md} {
-        margin: 3em 0;
+        margin: 4em 0 3em;
     }
 `;
 
