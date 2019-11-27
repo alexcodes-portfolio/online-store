@@ -8,7 +8,7 @@ export const StyledNavbar = styled(Navbar)`
   background: #365BB0;//full colors
   box-shadow: 0 0.2em 1em #39528D;
 
-  @media (orientation: landscape), (min-width: 576px) {
+  @media (orientation: portrait) and (min-width: 576px), (orientation: landscape) and (min-width: 992px) {
     position: sticky;
     top: 0;
     left: 0;

@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
+import { FullHeightWrapper as Wrapper } from '../../StyledComponents/Elements';
 import UserForm from './UserForm';
 import API  from '../../API/UserAPI';
 import { signupModalLinks } from '../Core/Modal/ModalLinks';
@@ -17,15 +18,22 @@ class SignUpView extends Component {
             confirmPassword: '',
             errors: {}
         };
+        this.formRef = createRef();
     }
    
     handleChange = (e) => {        
         events.handleChange(this, e.target, () => this.validate(e));
-    }
+    };
 
     handleBlur = (e) => {
         events.handleBlur(this, () => this.validate(e));
-    }
+    };
+
+    handleFocus = () => {
+        if (document.documentElement.clientWidth < 767) {
+            this.formRef.current.scrollIntoView({behavior: 'smooth'});
+        }
+    };
 
     validate({target}) {
         return target.name !== 'confirmPassword'? API.validateSignupInput(target) : API.validateSignupInput(target, this.state.password);
@@ -79,7 +87,7 @@ class SignUpView extends Component {
                 this.resetForm();
         })
         .catch(err => console.log(err));        
-    }
+    };
 
     componentWillUnmount() {
         //empty the errors object in the API (so that email and c.P. errors do not prevent the validation of the login form)
@@ -89,17 +97,20 @@ class SignUpView extends Component {
     render(){
         const handleEvents = {
             onChange: this.handleChange,
-            onBlur: this.handleBlur
+            onBlur: this.handleBlur,
+            onFocus: this.handleFocus
         };
 
-        return (          
-            <UserForm 
-                {...this.state}
-                submitForm={this.signUp} 
-                {...handleEvents}
-                action="Sign up" 
-                errors={this.state.errors}
-            />
+        return (    
+            <Wrapper ref={this.formRef}>      
+                <UserForm 
+                    {...this.state}
+                    submitForm={this.signUp} 
+                    {...handleEvents}
+                    action="Sign up" 
+                    errors={this.state.errors}
+                />
+            </Wrapper>
         );
     }
 };

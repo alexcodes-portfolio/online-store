@@ -3,6 +3,14 @@ import { sm, md, xl } from './MediaQueries';
 
 export const Wrapper = styled.div``;
 
+export const FullHeightWrapper = styled(Wrapper)`
+    min-height: 100vh;
+  
+    @media ${sm} {
+      min-height: auto;
+    }
+`;
+
 export const StyledParagraph = styled.p`
     ${props => props.centered && 
       `text-align: center;

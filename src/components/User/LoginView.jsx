@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Row } from 'reactstrap';
 import CustomCol from '../Core/CustomCol';
 import UserForm from './UserForm';
 import  * as events  from './HandleEvents';
 import { loginErrorLinks } from '../Core/Modal/ModalLinks';
-import { Wrapper, StyledParagraph } from '../../StyledComponents/Elements';
+import { FullHeightWrapper as Wrapper, StyledParagraph } from '../../StyledComponents/Elements';
 import { StyledLink } from '../../StyledComponents/Link';
 import API from '../../API/UserAPI';
 import Auth from './Auth';
@@ -24,6 +24,8 @@ class LoginView extends Component {
             redirectToReferrer: false,
             errors: {}
         };
+
+        this.formRef = createRef();
     }
 
     handleChange = e => {
@@ -37,6 +39,10 @@ class LoginView extends Component {
     //remove the error message after the field is focused (only for login form)
     handleFocus = e => {
         events.handleFocus(this, e);
+    
+        if (document.documentElement.clientWidth < 767) {
+            this.formRef.current.scrollIntoView({behavior: 'smooth'});
+        }
     };
 
     //check if the field is empty
@@ -135,7 +141,7 @@ class LoginView extends Component {
         }
 
         return (
-            <Wrapper>
+            <Wrapper ref={this.formRef}>
                 <UserForm 
                     {...this.state} 
                     submitForm={this.login} 
