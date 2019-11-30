@@ -22,3 +22,13 @@ export const CenteredCol = styled(props => <CustomCol xxs="12" {...props} />)`
     margin-top: 2em;
     margin-bottom: 2em;
 `;
+
+export const FullScreenContainer = styled(Container)`
+    position: fixed;
+    top: 0;
+    z-index: 2000;
+    background: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+`;
