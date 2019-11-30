@@ -62,6 +62,7 @@ export const ProductImgWrapper = styled(CustomCol).attrs({
     _3xl: 3
 })`
     align-self: flex-start;
+    text-align: center;
  
     @media ${md} {
         margin-bottom: 1.5em;
