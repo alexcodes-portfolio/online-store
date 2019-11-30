@@ -20,6 +20,8 @@ class SignUpView extends Component {
         };
         this.formRef = createRef();
     }
+
+    abortController = new window.AbortController();
    
     handleChange = (e) => {        
         events.handleChange(this, e.target, () => this.validate(e));
@@ -36,7 +38,8 @@ class SignUpView extends Component {
     };
 
     validate({target}) {
-        return target.name !== 'confirmPassword'? API.validateSignupInput(target) : API.validateSignupInput(target, this.state.password);
+        const { signal } = this.abortController;
+        return target.name !== 'confirmPassword'? API.validateSignupInput(target, null, signal) : API.validateSignupInput(target, this.state.password, signal);
     }
 
     setErrors(errors = {}) {
@@ -56,11 +59,13 @@ class SignUpView extends Component {
     signUp = (e) => {
         e.preventDefault();     
         const { username, password, email } = this.state;
+        const { signal } = this.abortController;
 
         API.validateAll(
             e.target,
             'validateSignupInput',
-            password
+            password,
+            signal
         )
         .then(errors => {
             //errors -> UserAPI.errors
@@ -72,11 +77,11 @@ class SignUpView extends Component {
         .then(
             () => {
                 API.saveUser({
-                    id: API.getNextId() + 1,
+                    id: API.getNextId(signal) + 1,
                     username,
                     passwordHash: hashPassword(password),
                     email
-                });
+                }, signal);
                     
                 //display modal after successful signup
                 this.props.toggleModal({
@@ -86,12 +91,13 @@ class SignUpView extends Component {
                 }); 
                 this.resetForm();
         })
-        .catch(err => console.log(err));        
+        .catch(err => err);        
     };
 
     componentWillUnmount() {
         //empty the errors object in the API (so that email and c.P. errors do not prevent the validation of the login form)
         API.resetAllErrors();
+        this.abortController.abort();
     }
 
     render(){

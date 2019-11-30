@@ -28,6 +28,8 @@ class LoginView extends Component {
         this.formRef = createRef();
     }
 
+    abortController = new window.AbortController();
+
     handleChange = e => {
         events.handleChange(this, e.target, () => this.validate(e));
     }; 
@@ -72,7 +74,7 @@ class LoginView extends Component {
                 throw new Error('One or more required fields are empty.');
             }
         })
-        .then(() => Auth.authenticate({username, password}))
+        .then(() => Auth.authenticate({username, password}, this.abortController.signal))
         .then(
             user => {
                 this.handleAuthenticationError(user);
@@ -122,6 +124,7 @@ class LoginView extends Component {
     componentWillUnmount(){
         this.setErrors();
         API.resetAllErrors();
+        this.abortController.abort();
     }
 
     render(){
