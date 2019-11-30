@@ -8,14 +8,14 @@ const Image = ({path, fullSizeImg, toggleFullSize}) => {
     return (
         <Wrapper onClick={toggleFullSize}>
 
-            <ProductImg src={imgSrc} />
+            <ProductImg src={imgSrc} alt="nordic skis" />
 
             {fullSizeImg && 
                 <Backdrop>
                     <Icon name="times" size="3x" position="absolute" top="3%" right="5%" color="#fff" />
                 </Backdrop>
             }
-            {fullSizeImg && <ProductImg src={imgSrc} fullSize />}
+            {fullSizeImg && <ProductImg src={imgSrc} alt="nordic skis" fullSize />}
                     
         </Wrapper>
     );

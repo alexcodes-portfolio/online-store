@@ -8,7 +8,7 @@ import { StyledLink } from '../../StyledComponents/Link';
 
 export const Image = ({src}) => (
     <ImageWrapper>
-        <StyledImage src={src} alt="img"/>
+        <StyledImage src={src} alt="nordic skis"/>
     </ImageWrapper>
 );
 
