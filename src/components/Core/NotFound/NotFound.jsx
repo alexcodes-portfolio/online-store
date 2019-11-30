@@ -9,10 +9,10 @@ import { ErrorSubHeading as SubHeading } from '../../../StyledComponents/SubHead
 const NotFound = ({heading, subheadings, children}) => (
     <Wrapper>
         <CenteredRow fullWidth>
-            <Col xxs="10">
+            <Col xxs="10" xl="12">
                 <Heading>{heading}</Heading>
             </Col>
-            <Col xxs="10">
+            <Col xxs="10" xl="12">
 				{ subheadings.map(subheading => <SubHeading key={subheading}>{subheading}</SubHeading>) }
             </Col>
 			{children}
