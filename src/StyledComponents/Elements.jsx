@@ -54,5 +54,8 @@ export const StyledHr = styled.hr`
 export const ErrorWrapper = styled(Wrapper)`
   display: flex;
   align-items: center;
-  height: 60vh;
+
+  @media ${sm} {
+    height: 60vh;
+  }
 `;
