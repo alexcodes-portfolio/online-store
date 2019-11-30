@@ -18,7 +18,7 @@ import Disclaimer from './PrivacyPolicy/Disclaimer';
 import RotateDevice from './Core/RotateDevice';
 
 /**
- * state: user, search, searchResults, searchCleared, cart, cartUpdateRequired, modal, displayArrow, landscape
+ * state: user, search, searchResults, searchCleared, cart, cartUpdateRequired, modal, displayArrow, isLandscape
  */
 class App extends Component {
   constructor(props){
@@ -32,7 +32,7 @@ class App extends Component {
       modal: {
         isOpen: false
       },
-      landscape: false
+      isLandscape: false
     };
   }
 
@@ -62,8 +62,7 @@ class App extends Component {
     window.addEventListener('scroll', this.handleScrollThrottled);
 
     //handle landscape orientation on mobile
-    this.getOrientation();
-    window.addEventListener('resize', this.getOrientation);
+    this.listenToOrientationChange();
   } 
 
   componentDidUpdate(prevProps, prevState){
@@ -85,13 +84,17 @@ class App extends Component {
   }
 
   /**
-   * -------------------------------------
-   * get orientation
-   * -------------------------------------
+   * -----------------------------
+   * listen to orientation change 
+   * -----------------------------
    */  
-  getOrientation = () => {
-    let mq = window.matchMedia("(orientation: landscape) and (min-width: 480px) and (max-width: 991px)");
-    this.setState({landscape: mq.matches});
+  listenToOrientationChange = () => {
+    let query = window.matchMedia("(orientation: landscape) and (min-width: 480px) and (max-width: 991px)");
+    query.addListener(this.updateOrientation);    
+  };
+
+  updateOrientation = query => {
+    this.setState({isLandscape: query.matches});
   };
 
   /**
@@ -246,7 +249,7 @@ class App extends Component {
   }
   
   render(){
-    const { search, searchResults, cart, user, displayArrow, modal, landscape } = this.state;  
+    const { search, searchResults, cart, user, displayArrow, modal, isLandscape } = this.state;  
 
     const props = {
       onLoginStatusChange: this.handleLoginStatusChange,
@@ -261,7 +264,8 @@ class App extends Component {
       <Wrapper>
 
         <GlobalStyle />
-        {landscape && 
+
+        {isLandscape && 
           <RotateDevice />
         }
 
