@@ -15,9 +15,10 @@ import CartAPI from '../API/CartAPI';
 import { createBrowserHistory } from 'history';
 import { throttle } from 'lodash';
 import Disclaimer from './PrivacyPolicy/Disclaimer';
+import RotateDevice from './Core/RotateDevice';
 
 /**
- * state: user, search, searchResults, searchCleared, cart, cartUpdateRequired, modal, displayArrow
+ * state: user, search, searchResults, searchCleared, cart, cartUpdateRequired, modal, displayArrow, landscape
  */
 class App extends Component {
   constructor(props){
@@ -30,30 +31,39 @@ class App extends Component {
       displayArrow: false,
       modal: {
         isOpen: false
-      }
+      },
+      landscape: false
     };
   }
+
+  abortController = new window.AbortController();
 
   componentDidMount(){
     //handle the situation when the search results are loaded based on the path (search/...), not on the search form input (when you navigate to this path)
     this.initSearchOnLoad();
 
+    const { signal } = this.abortController;
+
     //is the user ID stored in local storage?
     if (Auth.isAuthenticated){
-      UserAPI.getUser()
+      UserAPI.getUser(signal)
       .then(
         user => {
           this.setState({
             user
           });
-          this.updateCart();
+          this.updateCart(signal);
         })
         .catch(err => err);
     } else {
-      this.updateCart();
+      this.updateCart(signal);
     }
 
     window.addEventListener('scroll', this.handleScrollThrottled);
+
+    //handle landscape orientation on mobile
+    this.getOrientation();
+    window.addEventListener('resize', this.getOrientation);
   } 
 
   componentDidUpdate(prevProps, prevState){
@@ -73,6 +83,16 @@ class App extends Component {
       this.updateCart();
     }    
   }
+
+  /**
+   * -------------------------------------
+   * get orientation
+   * -------------------------------------
+   */  
+  getOrientation = () => {
+    let mq = window.matchMedia("(orientation: landscape) and (min-width: 480px) and (max-width: 991px)");
+    this.setState({landscape: mq.matches});
+  };
 
   /**
    * ------------------------------------
@@ -126,8 +146,8 @@ class App extends Component {
     });
   }
 
-  updateCart = () => {
-    return CartAPI.getCart(this.state.user)
+  updateCart = (signal) => {
+    return CartAPI.getCart(this.state.user, signal)
       .then(cart => {
        //sort items in cart alphabeticaly so that articles of the same type but diff. size are placed next to each other no matter when they are added
         this.sort(cart);
@@ -160,7 +180,7 @@ class App extends Component {
   */
   //get search results from the "database"
   loadSearchResults (searchVal) {
-    ProductAPI.search(searchVal).then(
+    ProductAPI.search(searchVal, this.abortController.signal).then(
       results => {
         this.setState({
           searchResults: results,
@@ -209,6 +229,7 @@ class App extends Component {
 
   componentWillUnmount() {
     this.handleScrollThrottled.cancel();
+    this.abortController.abort();
   }
 
   /**
@@ -225,7 +246,7 @@ class App extends Component {
   }
   
   render(){
-    const { search, searchResults, cart, user, displayArrow, modal } = this.state;  
+    const { search, searchResults, cart, user, displayArrow, modal, landscape } = this.state;  
 
     const props = {
       onLoginStatusChange: this.handleLoginStatusChange,
@@ -240,6 +261,9 @@ class App extends Component {
       <Wrapper>
 
         <GlobalStyle />
+        {landscape && 
+          <RotateDevice />
+        }
 
         <Header  
           {...props}  
@@ -256,8 +280,8 @@ class App extends Component {
         }
         {displayArrow &&
           <ScrollToTopButton />
-        }
-        
+        }      
+                
       </Wrapper>
     );
   }

@@ -79,7 +79,7 @@ class Product extends Component {
             .then(product => ProductAPI.updateStock('remove', product)) //reduce the number of products in stock
             .then(() => this.props.updateProduct())   //reload product (new data in select)
             .then(() => this.props.updateCart())      //update cart so that the number next to cart icon changes if necessary
-            .catch(err => console.log(err));  
+            .catch(err => err);  
     };
 
     handleSelectChange = (name, value) => {
@@ -92,7 +92,6 @@ class Product extends Component {
         this.setState({
             fullSizeImg: !this.state.fullSizeImg
         });
-        //e.currentTarget.classList.toggle('full-size');
     };
 
     componentDidUpdate(prevProps){

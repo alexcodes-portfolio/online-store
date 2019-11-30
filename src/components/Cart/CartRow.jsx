@@ -27,6 +27,7 @@ class CartRow extends Component {
     handleChange(cartAction, stockAction, value){
 
         const { product, updateCart } = this.props; //product from the cart
+       
 
         CartAPI[cartAction](product, value)
             .then( () => {

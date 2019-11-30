@@ -23,6 +23,8 @@ class ProductView extends Component {
         };        
    }
 
+   abortController = new window.AbortController();
+
    componentDidMount(){
         this.loadProducts();
     }  
@@ -38,19 +40,21 @@ class ProductView extends Component {
     }
 
     loadProducts() {
-        this.getProduct()
+        const { signal } = this.abortController;
+
+        this.getProduct(signal)
             .then(product => {
                 //if reponse is not 404
                 if (product) {
                     //get other products of this category
-                    return this.getRelatedProducts(product);
+                    return this.getRelatedProducts(product, signal);
                 }
             })
-            .catch(err => console.log(err));
+            .catch(err => err);
     }
 
-    getProduct(){
-        return API.getById(this.props.match.params.productId)
+    getProduct(signal){
+        return API.getById(this.props.match.params.productId, signal)
             .then(result => {
                 
                 if (result.constructor === Error){
@@ -65,8 +69,8 @@ class ProductView extends Component {
             });
     }
 
-    getRelatedProducts(currentProduct){
-        return API.getProductsByCategory(currentProduct.category)
+    getRelatedProducts(currentProduct, signal){
+        return API.getProductsByCategory(currentProduct.category, signal)
             .then(products => {
                 return products.filter(
                     product => product.id !== currentProduct.id //exclude current product from the list of related p.
@@ -89,6 +93,10 @@ class ProductView extends Component {
             links: productAddedLinks
         });
     };
+
+    componentWillUnmount() {
+        this.abortController.abort();
+    }
 
     render(){  
         const { product, relatedProducts, error } = this.state;

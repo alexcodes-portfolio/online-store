@@ -2,8 +2,8 @@ import UserAPI from '../../API/UserAPI';
 
 const Auth = {
     isAuthenticated: localStorage.getItem('userId')? true : false,
-    authenticate(params) {
-        return UserAPI.authenticate(params).then(
+    authenticate(params, signal) {
+        return UserAPI.authenticate(params, signal).then(
             user => {
                 this.isAuthenticated = true;
                 localStorage.setItem('userId', user.id);

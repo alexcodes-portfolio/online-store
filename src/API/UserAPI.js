@@ -3,8 +3,8 @@ import { users } from './Paths';
 
 const UserAPI = {
     errors: {},
-    getAll(){
-        return fetch(`${users}/`
+    getAll(signal){
+        return fetch(`${users}/`, {signal}
             ).then(
                 response => response.json()
             ).then(
@@ -13,9 +13,9 @@ const UserAPI = {
                 err => err
             );  
     },
-    getUser(){
+    getUser(signal){
         const id = localStorage.userId? localStorage.userId : null;
-        return fetch(`${users}/${id}`)
+        return fetch(`${users}/${id}`, {signal})
             .then(response => response.json())
             .then(user => user)
             .catch(
@@ -41,7 +41,7 @@ const UserAPI = {
      * VALIDATE A SINGLE FIELD
      * -----------------------------------------
      */
-    validateSignupInput(field, password = null) {
+    validateSignupInput(field, password = null, signal) {
         const { name, value, minLength = null, maxLength = null } = field;
         this.resetError(name);//{...error: ''}
 
@@ -59,7 +59,7 @@ const UserAPI = {
             .then(prevError => {
                 if (this.errors[name + 'Error'] !== '') return prevError;
                 
-                return this.checkIfUnique(name, value); 
+                return this.checkIfUnique(name, value, signal); 
             })
             .then(() => this.getErrors())
             .catch(err => err);
@@ -78,12 +78,12 @@ const UserAPI = {
      * VALIDATE ALL FIELDS ON SUBMIT
      * --------------------------------------
      */
-    validateAll(form, action, password = null) {
+    validateAll(form, action, password = null, signal) {
         //extract data array from the form: [{name: 'username', value: '', minLength: ..., maxLength: ...}, {name: 'password', ...}, {...}]
         const data = this.extractData(form);
 
         //action: method used for validation, depends on which form is being validated
-        const errors  = data.map(field => this[action](field, password));
+        const errors  = data.map(field => this[action](field, password, signal));
 
         return Promise.all(errors)
             .then(() => {   
@@ -101,10 +101,9 @@ const UserAPI = {
      * DIFFERENT STAGES OF VALIDATION
      * -----------------------------------
      */
-    checkIfUnique(name, value) {
+    checkIfUnique(name, value, signal) {
         if (name === 'password' || name === 'confirmPassword') return;
-
-        return this.getAll()
+        return this.getAll(signal)
             .then(users => {
                 return users.find(user => user[name] === value)
             })
@@ -185,14 +184,15 @@ const UserAPI = {
     getErrors() {
         return this.errors;
     },
-    saveUser(data){
+    saveUser(data, signal){
         fetch(`${users}/`, {
             method: 'post',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            signal
         }).then(
             response => response.json()
         ).then( 
@@ -201,8 +201,8 @@ const UserAPI = {
             err => err
         );
     },
-    authenticate(input){
-        return this.getAll()
+    authenticate(input, signal){
+        return this.getAll(signal)
         .then(
             users => {
                 let user = users.find(
@@ -216,8 +216,8 @@ const UserAPI = {
             err => err            
         );
     },
-    getNextId(){        
-        this.getAll()
+    getNextId(signal){  
+        this.getAll(signal)
             .then(
                 users => {
                     //if this is the 1st user in the 'database', store 0 as id

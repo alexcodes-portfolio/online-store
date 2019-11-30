@@ -2,12 +2,13 @@ import { cart, users } from './Paths';
 //localStorage.cart only contains items added before logging in!
 
 const CartAPI = {
-    getCart(user){
-        if(!user){
+    getCart(user, signal){
+        
+        if(!user){           
             return this.getCartFromStorage();
         }
 
-        return fetch(`${users}/${user.id}/cart`)
+        return fetch(`${users}/${user.id}/cart`, {signal})
             .then(response => response.json())
             .then(cart =>  {
                 if (!cart) cart = [];
@@ -17,10 +18,11 @@ const CartAPI = {
     },
     getCartFromStorage(){
         let cart = localStorage.getItem('cart');
-        if (!cart){
+        if (!cart) {
             cart = localStorage.setItem('cart', JSON.stringify([]));
+            return Promise.resolve([]);
         }
-        return Promise.resolve(JSON.parse(cart));
+        return Promise.resolve(JSON.parse(cart));      
     },
     updateCartInStorage(cart){
         if ( !cart ) {
@@ -35,7 +37,6 @@ const CartAPI = {
     * 2. when a non-logged in user adds products to cart, and then logs in so the 2 carts are combined
     */
     addToCart({product, productId, selectedSize, selectedQuantity, userId = null}){   
-         
         let submittedProduct = {...product, productId, selectedSize, selectedQuantity};
         delete submittedProduct.id;   
 
@@ -106,7 +107,7 @@ const CartAPI = {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(product)           
+            body: JSON.stringify(product)         
         }).then(
             response => response.json())
         .then(result => result)
@@ -135,7 +136,6 @@ const CartAPI = {
             body: JSON.stringify(product)
         }).then(response => response.json()
         );
-
     },
     //delete product from cart in local storage or on json-server
     deleteFromCart(product){

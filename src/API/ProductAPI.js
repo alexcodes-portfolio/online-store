@@ -6,8 +6,8 @@ const ProductAPI = {
     currentSearch: '',
     searchResults: null,
 
-    getAll(){
-        return fetch(products)
+    getAll(signal){
+        return fetch(products, {signal})
             .then(handle404)
             .then(response => response.json())
             .then(products => products)
@@ -15,8 +15,8 @@ const ProductAPI = {
         );
     },
     //get an array of category names
-    getCategories(){
-        return this.getAll()
+    getCategories(signal){
+        return this.getAll(signal)
             .then(products => {
                 //remove duplicate category items
                 return products.reduce((categories, product) => {
@@ -28,8 +28,8 @@ const ProductAPI = {
             })
     },
     //get products of a certain category
-    getProductsByCategory(category){
-        return this.getAll()
+    getProductsByCategory(category, signal){
+        return this.getAll(signal)
             .then(products => {
                 return products.filter(
                     product => product.category === category
@@ -37,22 +37,22 @@ const ProductAPI = {
             })
             .catch(err => err);
     },
-    getById(id){
-        return fetch(`${products}/${id}`)
+    getById(id, signal){
+        return fetch(`${products}/${id}`, {signal})
             .then(handle404)
             .then(response => response.json())
             .then(product => product)
             .catch(err => err
         );        
     },
-    search(search){
+    search(search, signal){
         if (search === this.currentSearch){
             return new Promise(resolve => {
                 resolve(this.searchResults);
             });
         }
         return fetch(
-            `${products}?q=${search}`
+            `${products}?q=${search}`, {signal}
         ).then(
             response => response.json()
         ).then(
@@ -88,13 +88,15 @@ const ProductAPI = {
         const totalAvailableQuantity =  product.sizes.find(item => selectedSize === item.size).quantity;
 
         return this.getById(productId) //get product from the stock
-            .then(product => {          
+            .then(product => {   
                 //get the object with the current size (stock)
+
                 let currentSize = product.sizes.find(item => selectedSize === item.size); 
-               
+            
                 this[action](currentSize, selectedQuantity, totalAvailableQuantity);
-               
+            
                 return product;
+                
             })
             .then(product => this.saveChanges(product));
     },

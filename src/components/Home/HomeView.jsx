@@ -16,28 +16,36 @@ class HomeView extends Component {
         };
     }
 
-    componentDidMount(){
-        ProductAPI.getCategories() //get category names
+    abortController = new window.AbortController();
+
+    componentDidMount() {
+        const { signal } = this.abortController;
+
+        ProductAPI.getCategories(signal) //get category names
             .then(categories => {
-                    const products = this.getProducts(categories); //get products of each category and store them in the state
+                    const products = this.getProducts(categories, signal); //get products of each category and store them in the state
                     Promise.all(products)
                         .then(() => this.setState({ //store the category name in the state
                             categories
                         })); 
                 })
-            .catch(err => console.log(err));
+            .catch(err => err);
     }
     
     //get all products [{...}, {...}] of each category and store them in the state: Classic: [{},{}], Skating [{}]
-    getProducts(categories) {
+    getProducts(categories, signal) {
         return categories.map(
             category => {
-                return ProductAPI.getProductsByCategory(category)
+                return ProductAPI.getProductsByCategory(category, signal)
                     .then(products => this.setState({ 
                         [category]: products
                     }));
             }
         );
+    }
+
+    componentWillUnmount() {
+        this.abortController.abort();
     }
 
     render(){  

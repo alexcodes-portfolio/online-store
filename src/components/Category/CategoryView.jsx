@@ -16,6 +16,8 @@ class CategoryView extends Component {
         }
     }
 
+    abortController = new window.AbortController();
+
     componentDidMount(){        
         this.getProducts();
     } 
@@ -29,7 +31,7 @@ class CategoryView extends Component {
     }
 
     getProducts(){
-        ProductAPI.getProductsByCategory(this.state.category)
+        ProductAPI.getProductsByCategory(this.state.category, this.abortController.signal)
         .then(products => {
             this.setState({
                 products: products
@@ -51,6 +53,10 @@ class CategoryView extends Component {
         return props.match.params.category;
     } 
     
+    componentWillUnmount() {
+        this.abortController.abort();
+    }
+
     render(){
         const { category, products } = this.state;
 
