@@ -17,3 +17,5 @@ The connection to the backend is provided via the fake REST API JSON Server depl
 - Feedback is provided after adding or removing items, as well as after creating an account, or entering incorrect data when logging in.
 - If you add items to the cart as an anonymous user and then log in, the items in the cart will be preserved. If any items had been placed in the cart during the previous authenticated session, the contents of the anonymous cart will be merged into the existing authenticated cart.
 - The contents of the cart do not expire even after a full browser restart as they are saved to localStorage.
+
+### Copyright © 2019 alex-codes
