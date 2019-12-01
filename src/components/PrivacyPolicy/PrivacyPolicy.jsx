@@ -34,7 +34,7 @@ const PrivacyPolicy = () => {
 	return (
 		<Wrapper ref={innerRef}>
 			<Link to="/">Go back</Link>
-			<Heading as="h1">Datenschutzerklärung</Heading>
+			<Heading as="h1">Datenschutz&shy;er&shy;klärung</Heading>
 			<Heading as="h2">Datenschutz</Heading>
 			<p>Wir haben diese Datenschutzerklärung (Fassung 16.11.2019-311128595) verfasst, um Ihnen gemäß der Vorgaben der Datenschutz-Grundverordnung (EU) 2016/679 zu erklären, welche Informationen wir sammeln, wie wir Daten verwenden und welche Entscheidungsmöglichkeiten Sie als Besucher dieser Webseite haben.</p>
 			<p>Leider liegt es in der Natur der Sache, dass diese Erklärungen sehr technisch klingen, wir haben uns bei der Erstellung jedoch bemüht die wichtigsten Dinge so einfach und klar wie möglich zu beschreiben.</p>
@@ -103,7 +103,7 @@ const PrivacyPolicy = () => {
 			<p>Wir nutzen Ihre persönlichen Daten somit nur für die Kommunikation mit jenen Besuchern, die Kontakt ausdrücklich wünschen und für die Abwicklung der auf dieser Webseite angebotenen Dienstleistungen und Produkte. Wir geben Ihre persönlichen Daten ohne Zustimmung nicht weiter, können jedoch nicht ausschließen, dass diese Daten beim Vorliegen von rechtswidrigem Verhalten eingesehen werden.</p>
 			<p>Wenn Sie uns persönliche Daten per E-Mail schicken – somit abseits dieser Webseite – können wir keine sichere Übertragung und den Schutz Ihrer Daten garantieren. Wir empfehlen Ihnen, vertrauliche Daten niemals unverschlüsselt per E-Mail zu übermitteln.</p>
 			<p>Die Rechtsgrundlage besteht nach Artikel 6  Absatz 1 a DSGVO (Rechtmäßigkeit der Verarbeitung) darin, dass Sie uns die Einwilligung zur Verarbeitung der von Ihnen eingegebenen Daten geben. Sie können diesen Einwilligung jederzeit widerrufen – eine formlose E-Mail reicht aus, Sie finden unsere Kontaktdaten im Impressum.</p>
-			<Heading as="h2">Rechte laut Datenschutzgrundverordnung</Heading>
+			<Heading as="h2">Rechte laut Datenschutz&shy;grund&shy;ver&shy;ordnung</Heading>
 			<p>Ihnen stehen laut den Bestimmungen der DSGVO grundsätzlich die folgende Rechte zu:</p>
 			<ul>
 				<li>Recht auf Berichtigung (Artikel 16 DSGVO)</li>
@@ -115,12 +115,12 @@ const PrivacyPolicy = () => {
 				<li>Recht, nicht einer ausschließlich auf einer automatisierten Verarbeitung — einschließlich Profiling — beruhenden Entscheidung unterworfen zu werden (Artikel 22 DSGVO)</li>
 			</ul>
 			<p>Wenn Sie glauben, dass die Verarbeitung Ihrer Daten gegen das Datenschutzrecht verstößt oder Ihre datenschutzrechtlichen Ansprüche sonst in einer Weise verletzt worden sind, können Sie sich an die Bundesbeauftragte für den Datenschutz und die Informationsfreiheit (BfDI) wenden.</p>
-			<Heading as="h2">Auswertung des Besucherverhaltens</Heading>
+			<Heading as="h2">Auswertung des Besucher&shy;verhaltens</Heading>
 			<p>In der folgenden Datenschutzerklärung informieren wir Sie darüber, ob und wie wir Daten Ihres Besuchs dieser Website auswerten. Die Auswertung der gesammelten Daten erfolgt in der Regel anonym und wir können von Ihrem Verhalten auf dieser Website nicht auf Ihre Person schließen.</p>
 			<p>Mehr über Möglichkeiten dieser Auswertung der Besuchsdaten zu widersprechen erfahren Sie in der folgenden Datenschutzerklärung.</p>
 			<Heading as="h2">TLS-Verschlüsselung mit https</Heading>
 			<p>Wir verwenden https um Daten abhörsicher im Internet zu übertragen (Datenschutz durch Technikgestaltung <CustomLink src="https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016R0679&from=DE&tid=311128589">Artikel 25 Absatz 1 DSGVO</CustomLink>). Durch den Einsatz von TLS (Transport Layer Security), einem Verschlüsselungsprotokoll zur sicheren Datenübertragung im Internet können wir den Schutz vertraulicher Daten sicherstellen. Sie erkennen die Benutzung dieser Absicherung der Datenübertragung am kleinen Schloßsymbol links oben im Browser und der Verwendung des Schemas https (anstatt http) als Teil unserer Internetadresse.</p>
-			<Heading as="h2">Google Fonts Datenschutzerklärung</Heading>
+			<Heading as="h2">Google Fonts Datenschut&shy;zerklärung</Heading>
 			<p>Wir verwenden Google Fonts der Firma Google Inc. (1600 Amphitheatre Parkway Mountain View, CA 94043, USA) auf unserer Webseite.</p>
 			<p>Für die Verwendung von Google-Schriftarten müssen Sie sich nicht anmelden bzw. ein Passwort hinterlegen. Weiters werden auch keine Cookies in Ihrem Browser gespeichert. Die Dateien (CSS, Schriftarten/Fonts) werden über die Google-Domains fonts.googleapis.com und fonts.gstatic.com angefordert. Laut Google sind die Anfragen nach CSS und Schriften vollkommen getrennt von allen anderen Google-Diensten. Wenn Sie ein Google-Konto haben, brauchen Sie keine Sorge haben, dass Ihre Google-Kontodaten, während der Verwendung von Google Fonts, an Google übermittelt werden. Google erfasst die Nutzung von CSS (Cascading Style Sheets) und der verwendeten Schriftarten und speichert diese Daten sicher. Wie die Datenspeicherung genau aussieht, werden wir uns noch im Detail ansehen.</p>
 			<Heading as="h3">Was sind Google Fonts?</Heading>
@@ -140,7 +140,7 @@ const PrivacyPolicy = () => {
 			<p>Jene Daten, die Google für einen Tag bzw. ein Jahr speichert können nicht einfach gelöscht werden. Die Daten werden beim Seitenaufruf automatisch an Google übermittelt. Um diese Daten vorzeitig löschen zu können, müssen Sie den Google-Support auf <CustomLink src="https://support.google.com/?hl=de&tid=311123798">https://support.google.com/?hl=de&tid=311123798</CustomLink> kontaktieren. Datenspeicherung verhindern Sie in diesem Fall nur, wenn Sie unsere Seite nicht besuchen.</p>
 			<p>Anders als andere Web-Schriften erlaubt uns Google uneingeschränkten Zugriff auf alle Schriftarten. Wir können also unlimitiert auf ein Meer an Schriftarten zugreifen und so das Optimum für unsere Webseite rausholen. Mehr zu Google Fonts und weiteren Fragen finden Sie auf <CustomLink src="https://developers.google.com/fonts/faq?tid=311123798">https://developers.google.com/fonts/faq?tid=311123798</CustomLink>. Dort geht zwar Google auf datenschutzrelevante Angelegenheiten ein, doch wirklich detaillierte Informationen über Datenspeicherung sind nicht enthalten. Es ist relativ schwierig (beinahe unmöglich), von Google wirklich präzise Informationen über gespeicherten Daten zu bekommen.</p>
 			<p>Welche Daten grundsätzlich von Google erfasst werden und wofür diese Daten verwendet werden, können Sie auch auf <CustomLink src="https://www.google.com/intl/de/policies/privacy/">https://www.google.com/intl/de/policies/privacy/</CustomLink> nachlesen.</p>
-			<Heading as="h2">Google Analytics Datenschutzerklärung</Heading>
+			<Heading as="h2">Google Analytics Datenschutz&shy;erklärung</Heading>
 			<p>Wir verwenden auf dieser Website Google Analytics der Firma Google LLC (1600 Amphitheatre Parkway Mountain View, CA 94043, USA) um Besucherdaten statistisch auszuwerten. Dabei verwendet Google Analytics zielorientierte Cookies.</p>
 			<Heading as="h3">Cookies von Google Analytics</Heading>
 			<ul>
@@ -175,7 +175,7 @@ const PrivacyPolicy = () => {
 			<Heading as="h2">Google Analytics Deaktivierungslink</Heading>
 			<p>Wenn Sie auf folgenden <strong>Deaktivierungslink</strong> klicken, können Sie verhindern, dass Google weitere Besuche auf dieser Webseite erfasst. Achtung: Das Löschen von Cookies, die Nutzung des Inkognito/Privatmodus ihres Browsers, oder die Nutzung eines anderen Browsers führt dazu, dass wieder Daten erhoben werden.</p>
 			<p>[google_analytics_optout]Google Analytics deaktivieren[/google_analytics_optout]</p>
-			<Heading as="h2">Google Analytics Zusatz zur Datenverarbeitung</Heading>
+			<Heading as="h2">Google Analytics Zusatz zur Daten&shy;ver&shy;arbeitung</Heading>
 			<p>Wir haben mit Google einen Direktkundenvertrag zur Verwendung von Google Analytics abgeschlossen, indem wir den “Zusatz zur Datenverarbeitung” in Google Analytics akzeptiert haben.</p>
 			<p>Mehr über den Zusatz zur Datenverarbeitung für Google Analytics finden Sie hier: <CustomLink src="https://support.google.com/analytics/answer/3379636?hl=de&utm_id=ad">https://support.google.com/analytics/answer/3379636?hl=de&utm_id=ad</CustomLink></p>
 			<p>Quelle: Erstellt mit dem Datenschutz Generator von AdSimple in Kooperation mit <CustomLink src="https://www.fashiongott.de/">fashiongott.de</CustomLink></p>
