@@ -6,10 +6,12 @@ import { TableRow } from '../../StyledComponents/Cart';
 import CartAPI from '../../API/CartAPI';
 import ProductAPI from '../../API/ProductAPI';
 import { getAvailableQuantity } from '../Core/Functions';
+import { ImgExtensionContext } from '../Core/Context';
 
 /**
  * props: product, updateCart, rowTotal, updateTotalCartPrice, createModal
  * state: selectedQuantity
+ * context: imgExtension
  */
 class CartRow extends Component {
     constructor(props){
@@ -61,13 +63,14 @@ class CartRow extends Component {
    
     render(){
 
-        const { product: { imgUrl, productId, name, sizes, selectedSize, price }, rowTotal } = this.props;          
+        const { product: { imgUrl, productId, name, sizes, selectedSize, price }, rowTotal, imgExtension } = this.props;          
 
         const quantitySelectOptions = getAvailableQuantity(sizes, selectedSize);
-        
+
         return (
-            <TableRow noGutters>
-                <Image src={require(`../../img/${imgUrl}`)} />
+            this.context && <TableRow noGutters>
+               
+                <Image src={require(`../../img/${imgUrl}.${this.context}`)} />
                 
                 <Title id={productId} name={name} size={selectedSize} />
                 
@@ -95,3 +98,5 @@ class CartRow extends Component {
 }
 
 export default CartRow;
+
+CartRow.contextType = ImgExtensionContext;

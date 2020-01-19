@@ -2,8 +2,10 @@ import React from 'react';
 import Icon from '../Core/Icon';
 import { ProductImgWrapper as Wrapper, ProductImg, Backdrop, } from '../../StyledComponents/Product';
 
-const Image = ({path, fullSizeImg, toggleFullSize}) => {
-    let imgSrc = require(`../../img/${fullSizeImg? 'lg_' + path : path}`);
+
+const Image = ({path, fullSizeImg, toggleFullSize, imgExtension}) => {
+    
+    let imgSrc = require(`../../img/${fullSizeImg? 'lg_' + path : path}.${imgExtension}`);
 
     return (
         <Wrapper onClick={toggleFullSize}>

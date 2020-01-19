@@ -16,9 +16,11 @@ import { createBrowserHistory } from 'history';
 import { throttle } from 'lodash';
 import Disclaimer from './PrivacyPolicy/Disclaimer';
 import RotateDevice from './Core/RotateDevice';
+import { ImgExtensionContext } from './Core/Context';
+import { supportsWebp } from './Core/Functions';
 
 /**
- * state: user, search, searchResults, searchCleared, cart, cartUpdateRequired, modal, displayArrow, isLandscape
+ * state: user, search, searchResults, searchCleared, cart, cartUpdateRequired, modal, displayArrow, isLandscape, imgExtension
  */
 class App extends Component {
   constructor(props){
@@ -32,7 +34,8 @@ class App extends Component {
       modal: {
         isOpen: false
       },
-      isLandscape: false
+      isLandscape: false,
+      imgExtension: false
     };
   }
 
@@ -63,6 +66,12 @@ class App extends Component {
 
     //handle landscape orientation on mobile
     this.listenToOrientationChange();
+
+    //check webp support
+    supportsWebp(
+      'lossless', 
+      (feature, result) => this.setState({ imgExtension: result? 'webp' : 'jpeg' })
+    );
   } 
 
   componentDidUpdate(prevProps, prevState){
@@ -89,7 +98,7 @@ class App extends Component {
    * -----------------------------
    */  
   listenToOrientationChange = () => {
-    let query = window.matchMedia("(orientation: landscape) and (min-width: 480px) and (max-width: 991px)");
+    let query = window.matchMedia("(orientation: landscape) and (min-width: 480px) and (max-width: 991px) and (min-aspect-ratio: 13/9)");
     query.addListener(this.updateOrientation);    
   };
 
@@ -249,7 +258,7 @@ class App extends Component {
   }
   
   render(){
-    const { search, searchResults, cart, user, displayArrow, modal, isLandscape } = this.state;  
+    const { search, searchResults, cart, user, displayArrow, modal, isLandscape, imgExtension } = this.state;  
 
     const props = {
       onLoginStatusChange: this.handleLoginStatusChange,
@@ -264,7 +273,7 @@ class App extends Component {
       <Wrapper>
 
         <GlobalStyle />
-
+        
         {isLandscape && 
           <RotateDevice />
         }
@@ -275,9 +284,11 @@ class App extends Component {
         <Modal  
           {...modal} toggleModal={this.toggleModal} 
         />
-        <Main 
-          {...props} updateCart={this.updateCart} clearSearch={this.clearSearch} searchResults={searchResults} 
-        />
+        <ImgExtensionContext.Provider value={imgExtension}>
+          <Main 
+            {...props} updateCart={this.updateCart} clearSearch={this.clearSearch} searchResults={searchResults} 
+          />
+        </ImgExtensionContext.Provider>
         <Disclaimer />
         {search && 
           <RedirectToSearch search={search} />

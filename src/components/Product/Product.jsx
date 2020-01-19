@@ -9,11 +9,13 @@ import { ProductHeading } from '../../StyledComponents/Heading';
 import { StyledParagraph, StyledHr } from '../../StyledComponents/Elements';
 import CartAPI from '../../API/CartAPI';
 import ProductAPI from '../../API/ProductAPI';
+import { ImgExtensionContext } from '../Core/Context';
 
 /**
  * props: product, updateProduct, cart, updateCart, currentUser, onLoginStatusChange,
  *        search, searchResults, clearSearch,  h., l., m.
  * state: selectedSize, selectedQuantity, fullSizeImg
+ * context: imgExtension
  */
 class Product extends Component {
     constructor(props){
@@ -109,7 +111,7 @@ class Product extends Component {
     }
 
     render(){
-        const { product: { name, imgUrl: path, description, price } } = this.props;
+        const { product: { name, imgUrl: path, description, price }, } = this.props;
       
 
         //fill select with options
@@ -119,12 +121,16 @@ class Product extends Component {
         return (
             <ProductWrapper noGutters>
                 <ProductHeading xs="12" smScreen>{name}</ProductHeading>
-        
-                <Image 
-                    path={path} 
-                    fullSizeImg={this.state.fullSizeImg}
-                    toggleFullSize={this.toggleFullSize} 
-                />
+                <ImgExtensionContext.Consumer>
+                    { imgExtension => (
+                        <Image 
+                            path={path} 
+                            fullSizeImg={this.state.fullSizeImg}
+                            toggleFullSize={this.toggleFullSize} 
+                            imgExtension={imgExtension}
+                        />
+                    )}
+                </ImgExtensionContext.Consumer>
                 <StyledHr displayMd="none" />
 
                 <CustomCol xxs="12" sm="10" lg="5" xl="4">
