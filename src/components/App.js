@@ -16,11 +16,9 @@ import { createBrowserHistory } from 'history';
 import { throttle } from 'lodash';
 import Disclaimer from './PrivacyPolicy/Disclaimer';
 import RotateDevice from './Core/RotateDevice';
-import { ImgExtensionContext } from './Core/Context';
-import { supportsWebp } from './Core/Functions';
 
 /**
- * state: user, search, searchResults, searchCleared, cart, cartUpdateRequired, modal, displayArrow, isLandscape, imgExtension
+ * state: user, search, searchResults, searchCleared, cart, cartUpdateRequired, modal, displayArrow, isLandscape
  */
 class App extends Component {
   constructor(props){
@@ -35,7 +33,6 @@ class App extends Component {
         isOpen: false
       },
       isLandscape: false,
-      imgExtension: false
     };
   }
 
@@ -66,12 +63,6 @@ class App extends Component {
 
     //handle landscape orientation on mobile
     this.listenToOrientationChange();
-
-    //check webp support
-    supportsWebp(
-      'lossless', 
-      (feature, result) => this.setState({ imgExtension: result? 'webp' : 'jpeg' })
-    );
   } 
 
   componentDidUpdate(prevProps, prevState){
@@ -258,7 +249,7 @@ class App extends Component {
   }
   
   render(){
-    const { search, searchResults, cart, user, displayArrow, modal, isLandscape, imgExtension } = this.state;  
+    const { search, searchResults, cart, user, displayArrow, modal, isLandscape } = this.state;  
 
     const props = {
       onLoginStatusChange: this.handleLoginStatusChange,
@@ -284,11 +275,11 @@ class App extends Component {
         <Modal  
           {...modal} toggleModal={this.toggleModal} 
         />
-        <ImgExtensionContext.Provider value={imgExtension}>
-          <Main 
-            {...props} updateCart={this.updateCart} clearSearch={this.clearSearch} searchResults={searchResults} 
-          />
-        </ImgExtensionContext.Provider>
+        
+        <Main 
+          {...props} updateCart={this.updateCart} clearSearch={this.clearSearch} searchResults={searchResults} 
+        />
+
         <Disclaimer />
         {search && 
           <RedirectToSearch search={search} />

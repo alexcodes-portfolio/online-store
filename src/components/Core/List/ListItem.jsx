@@ -5,22 +5,16 @@ import { ListItemRow, Thumbnail } from '../../../StyledComponents/List';
 import { ListSubHeading } from '../../../StyledComponents/SubHeading';
 import { StyledParagraph } from '../../../StyledComponents/Elements';
 import { StyledLink } from '../../../StyledComponents/Link';
-import { ImgExtensionContext as Context } from '../Context';
 
 /**
  * props: item
- * context: imgExtension
  */
 const ListItem = ({item}) => (
     <li>
         <ListItemRow>
             <CustomCol xxs="12" sm="6" md={{size: 4, offset: 1}} _3xl={{size: 3, offset: 2}}>
                 <Link to={`/product/${item.id}`}>
-                    <Context.Consumer>
-                        { imgExtension => (
-                            <Thumbnail src={require(`../../../img/${item.imgUrl}.${imgExtension}`)} />
-                        )}
-                    </Context.Consumer>
+                    <Thumbnail src={require(`../../../img/${item.imgUrl}.jpeg`)} />
                 </Link>
             </CustomCol>
             <CustomCol xxs="12" sm="6" md="5">
